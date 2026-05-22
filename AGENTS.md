@@ -19,7 +19,7 @@ A configuration repository that snapshots the user's [pi coding agent](https://p
     ├── extensions/        # Custom TypeScript extensions
     │   ├── btw.ts         # Side-question command (/btw), 523 lines
     │   └── tps-tracker.ts # Tokens-per-second live display, 105 lines
-    ├── skills/            # Skills from installed pi packages
+    ├── skills/            # Skills from agent skills dir + npm packages
     │   └── librarian/     # Open-source library research skill (pi-web-access)
     └── prompts/           # Prompt template directory (/command shortcuts)
         └── README.md      # Placeholder with usage instructions
@@ -59,11 +59,17 @@ Both extensions use the pi ExtensionAPI SDK (`@earendil-works/pi-coding-agent`):
    - Works with any provider/model
    - Sources: `~/.pi/agent/extensions/tps-tracker.ts`
 
-### Skills (`pi/skills/librarian/`)
-- **`librarian`** — Research open-source libraries with evidence-backed answers and GitHub permalinks
-- Installed via `pi-web-access` npm package
-- Standard-compliant skill (frontmatter + SKILL.md + instructions)
-- Sources: `~/.pi/agent/npm/node_modules/pi-web-access/skills/librarian/`
+### Skills (`pi/skills/`)
+1. **`project-node/`** — Records/retrieves project knowledge into structured notes (`.pi/notes/`)
+   - Sources: `~/.pi/agent/skills/project-node/`
+
+2. **`init/`** — Initializes/updates `AGENTS.md` by analyzing the codebase
+   - Installed via `pi-init` npm package
+   - Sources: `~/.pi/agent/npm/node_modules/pi-init/skills/init/`
+
+3. **`librarian/`** — Research open-source libraries with evidence-backed answers and GitHub permalinks
+   - Installed via `pi-web-access` npm package
+   - Sources: `~/.pi/agent/npm/node_modules/pi-web-access/skills/librarian/`
 
 ### Prompt Templates (`pi/prompts/`)
 - Currently empty (only a `README.md` placeholder)

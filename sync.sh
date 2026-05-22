@@ -127,17 +127,41 @@ for ext_file in "$EXT_SRC"/.*.ts.un~; do
 done
 
 # ──────────────────────────────────────────────────────────────────
-# 3. Skills from installed packages
+# 3. Skills
 # ──────────────────────────────────────────────────────────────────
 info "3. Copying pi skills..."
 
-# Librarian skill from pi-web-access package
-LIB_SRC="$PI_AGENT_HOME/npm/node_modules/pi-web-access/skills/librarian"
-LIB_DST="pi/skills/librarian"
-if [ -d "$LIB_SRC" ]; then
-	copy_dir "$LIB_SRC" "$LIB_DST"
+# 3a. Skills from agent skills directory (project-node, etc.)
+SKILL_SRC="$PI_AGENT_HOME/skills"
+SKILL_DST="pi/skills"
+if [ -d "$SKILL_SRC" ]; then
+	for skill_dir in "$SKILL_SRC"/*/; do
+		[ -d "$skill_dir" ] || continue
+		skill_name=$(basename "$skill_dir")
+		copy_dir "$skill_dir" "$SKILL_DST/$skill_name"
+	done
 else
-	warn "librarian skill not found (package not installed?)"
+	warn "skills directory not found: $SKILL_SRC"
+fi
+
+# 3b. Skills from installed npm packages (librarian, etc.)
+NPM_SKILL_SRC="$PI_AGENT_HOME/npm/node_modules"
+if [ -d "$NPM_SKILL_SRC" ]; then
+	for pkg_dir in "$NPM_SKILL_SRC"/*/; do
+		[ -d "$pkg_dir" ] || continue
+		for skill_dir in "$pkg_dir"skills/*/; do
+			[ -d "$skill_dir" ] || continue
+			skill_name=$(basename "$skill_dir")
+			# Skip if already synced (e.g. from agent skills or previous run)
+			if [ -d "$SKILL_DST/$skill_name" ]; then
+				ok "$skill_name/ already synced, skipping npm copy"
+				continue
+			fi
+			copy_dir "$skill_dir" "$SKILL_DST/$skill_name"
+		done
+	done
+else
+	warn "npm packages directory not found: $NPM_SKILL_SRC"
 fi
 
 # ──────────────────────────────────────────────────────────────────
