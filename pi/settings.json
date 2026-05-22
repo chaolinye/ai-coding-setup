@@ -5,6 +5,7 @@
   "defaultThinkingLevel": "high",
   "theme": "dark",
   "packages": [
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "npm:pi-init"
   ]
 }
