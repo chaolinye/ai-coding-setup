@@ -59,7 +59,7 @@ copy_dir() {
 		mkdir -p "$dst"
 		# Use rsync if available for cleaner output, fallback to cp
 		if command -v rsync &>/dev/null; then
-			rsync -a --delete "$src/" "$dst/"
+			rsync -a --delete --exclude="*.un~" "$src/" "$dst/"
 		else
 			rm -rf "$dst"
 			cp -R "$src" "$(dirname "$dst")"
@@ -115,13 +115,6 @@ EXT_SRC="$PI_AGENT_HOME/extensions"
 EXT_DST="pi/extensions"
 for ext_file in "$EXT_SRC"/*.ts; do
 	[ -f "$ext_file" ] || continue
-	ext_name=$(basename "$ext_file")
-	copy_file "$ext_file" "$EXT_DST/$ext_name"
-done
-
-# Copy extension .ts.un~ backup files if they exist
-for ext_file in "$EXT_SRC"/.*.ts.un~; do
-	[ -f "$ext_file" ] || break
 	ext_name=$(basename "$ext_file")
 	copy_file "$ext_file" "$EXT_DST/$ext_name"
 done
