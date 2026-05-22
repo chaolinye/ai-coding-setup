@@ -158,38 +158,11 @@ else
 fi
 
 # ──────────────────────────────────────────────────────────────────
-# 4. Prompt templates (create placeholder)
+# 4. Prompt templates
 # ──────────────────────────────────────────────────────────────────
-info "4. Creating prompt templates directory..."
+info "4. Copying pi prompt templates..."
 
 PROMPT_DST="pi/prompts"
-if [ "$DRY_RUN" = true ]; then
-	dry "mkdir -p $PROMPT_DST"
-	dry "write $PROMPT_DST/README.md (placeholder)"
-else
-	mkdir -p "$PROMPT_DST"
-	if [ ! -f "$PROMPT_DST/README.md" ]; then
-		cat > "$PROMPT_DST/README.md" <<- 'PROMPT_README'
-			# pi Prompt Templates
-
-			Put Markdown prompt templates here. They become `/command` shortcuts in pi.
-
-			```
-			---
-			description: Do something useful
-			---
-			Instructions for the task...
-			```
-
-			See [pi docs](https://pi.dev) for the full reference.
-		PROMPT_README
-		ok "prompts placeholder → $PROMPT_DST/README.md"
-	else
-		ok "prompts/ already exists, unchanged"
-	fi
-fi
-
-# Copy actual prompt templates from source
 PROMPT_SRC="$PI_AGENT_HOME/prompts"
 if [ -d "$PROMPT_SRC" ]; then
 	for prompt_file in "$PROMPT_SRC"/*.md; do
