@@ -189,6 +189,18 @@ else
 	fi
 fi
 
+# Copy actual prompt templates from source
+PROMPT_SRC="$PI_AGENT_HOME/prompts"
+if [ -d "$PROMPT_SRC" ]; then
+	for prompt_file in "$PROMPT_SRC"/*.md; do
+		[ -f "$prompt_file" ] || continue
+		prompt_name=$(basename "$prompt_file")
+		copy_file "$prompt_file" "$PROMPT_DST/$prompt_name"
+	done
+else
+	warn "prompts directory not found: $PROMPT_SRC"
+fi
+
 # ──────────────────────────────────────────────────────────────────
 # 5. Clean up — remove pi/npm if leftover from earlier syncs
 # ──────────────────────────────────────────────────────────────────
