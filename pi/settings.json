@@ -6,6 +6,7 @@
   "theme": "dark",
   "packages": [
     "npm:pi-web-access",
-    "npm:pi-init"
+    "npm:pi-init",
+    "npm:pi-weixinbot"
   ]
 }
