@@ -3,7 +3,7 @@
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-flash",
   "defaultThinkingLevel": "high",
-  "theme": "dark",
+  "theme": "light",
   "packages": [
     "npm:pi-web-access",
     "npm:pi-init",

@@ -1,15 +1,15 @@
 ---
 name: project-node
-description: Records project knowledge and decisions into structured notes (.pi/notes/), and retrieves them in future sessions. Trigger with "project note"/"record this"/"save that" (save) or "recall"/"project knowledge"/"what did we learn" (retrieve). Use whenever the user mentions saving project context or asks what we know about a topic.
+description: Records project knowledge and decisions into structured notes (docs/notes/), and retrieves them in future sessions. Trigger with "project note"/"record this"/"save that" (save) or "recall"/"project knowledge"/"what did we learn" (retrieve). Use whenever the user mentions saving project context or asks what we know about a topic.
 ---
 
 # Project Node Skill
 
 ## Storage Location
-All notes live under `.pi/notes/` in the project root (alongside `.pi/settings.json` if it exists).
+All notes live under `docs/notes/` in the project root.
 
 ```
-<project-root>/.pi/notes/
+<project-root>/docs/notes/
 ├── INDEX.md                # Table of contents (auto-maintained)
 └── entries/                # Individual note files
     ├── YYYY-MM-DD_type-slug-title.md
@@ -17,10 +17,10 @@ All notes live under `.pi/notes/` in the project root (alongside `.pi/settings.j
 ```
 
 ## Initialization
-If `.pi/notes/` does not exist when the user first tries to save a note, create it:
+If `docs/notes/` does not exist when the user first tries to save a note, create it:
 
 ```bash
-mkdir -p .pi/notes/entries
+mkdir -p docs/notes/entries
 ```
 
 Then write the initial `INDEX.md`:
@@ -107,7 +107,7 @@ Links to files, commits, issues, or external resources.
 
 4. **Write the note file** using the `write` tool:
    ```
-   .pi/notes/entries/YYYY-MM-DD_type-slug-title.md
+   docs/notes/entries/YYYY-MM-DD_type-slug-title.md
    ```
 
 5. **Update INDEX.md**:
@@ -123,7 +123,7 @@ Links to files, commits, issues, or external resources.
 6. **Confirm** to the user with a brief summary:
    ```
    ✅ Saved: [decision] Adopt Result Pattern for API Responses
-     Location: .pi/notes/entries/2026-05-22_decision-adopt-result-pattern.md
+     Location: docs/notes/entries/2026-05-22_decision-adopt-result-pattern.md
      Tags: api, typescript, error-handling
    ```
 
@@ -137,7 +137,7 @@ Links to files, commits, issues, or external resources.
 
 1. **Read INDEX.md** to get the full table of contents:
    ```bash
-   cat .pi/notes/INDEX.md 2>/dev/null
+   cat docs/notes/INDEX.md 2>/dev/null
    ```
    If INDEX.md doesn't exist or is empty, inform the user: _No project notes found yet._
 
@@ -145,15 +145,15 @@ Links to files, commits, issues, or external resources.
    - If the user asks about a specific topic, parse the INDEX table to find matching rows by title, type, date, or tags.
    - Use `bash grep -i` on INDEX.md for keyword searches:
      ```bash
-     grep -i "<keyword>" .pi/notes/INDEX.md
+     grep -i "<keyword>" docs/notes/INDEX.md
      ```
 
 3. **Deep-read matching notes**:
    - For each matching row, derive the filename from the date and title (or just search entries/ by date).
-   - `read` the full note file(s) from `.pi/notes/entries/`.
+   - `read` the full note file(s) from `docs/notes/entries/`.
    - Fallback search if INDEX is stale or filename is unclear:
      ```bash
-     ls .pi/notes/entries/ | grep -i "<keyword>"
+     ls docs/notes/entries/ | grep -i "<keyword>"
      ```
 
 4. **Synthesize and present**:
@@ -198,4 +198,4 @@ Found:
 - **Ambiguous type**: Default to `knowledge` if the type isn't clear.
 - **Omit optional sections**: If no references or rationale, just skip them.
 - **Chinese content**: Fully supported — filenames should still use English/kebab-case, but note body can be in Chinese.
-- **Existing .pi/ directory but no notes/**: Create `notes/` and `notes/entries/` on first save.
+- **No docs/notes/ directory**: Create `docs/notes/` and `docs/notes/entries/` on first save.
