@@ -3,7 +3,7 @@
 # sync.sh — Sync pi coding agent configuration to codehub
 # ──────────────────────────────────────────────────────────────────
 # Copies global pi agent config (settings, extensions, skills,
-# prompt templates, packages) into this repo, commits, and pushes.
+# prompt templates) into this repo, commits, and pushes.
 #
 # Idempotent: safe to run repeatedly.
 #
@@ -127,18 +127,9 @@ for ext_file in "$EXT_SRC"/.*.ts.un~; do
 done
 
 # ──────────────────────────────────────────────────────────────────
-# 3. Packages (npm configuration only, not node_modules)
+# 3. Skills from installed packages
 # ──────────────────────────────────────────────────────────────────
-info "3. Copying pi packages configuration..."
-
-copy_file "$PI_AGENT_HOME/npm/package.json" "pi/npm/package.json"
-copy_file "$PI_AGENT_HOME/npm/.gitignore" "pi/npm/.gitignore"
-copy_file "$PI_AGENT_HOME/npm/package-lock.json" "pi/npm/package-lock.json"
-
-# ──────────────────────────────────────────────────────────────────
-# 4. Skills from installed packages
-# ──────────────────────────────────────────────────────────────────
-info "4. Copying pi skills..."
+info "3. Copying pi skills..."
 
 # Librarian skill from pi-web-access package
 LIB_SRC="$PI_AGENT_HOME/npm/node_modules/pi-web-access/skills/librarian"
@@ -150,9 +141,9 @@ else
 fi
 
 # ──────────────────────────────────────────────────────────────────
-# 5. Prompt templates (create placeholder)
+# 4. Prompt templates (create placeholder)
 # ──────────────────────────────────────────────────────────────────
-info "5. Creating prompt templates directory..."
+info "4. Creating prompt templates directory..."
 
 PROMPT_DST="pi/prompts"
 if [ "$DRY_RUN" = true ]; then
@@ -182,26 +173,19 @@ else
 fi
 
 # ──────────────────────────────────────────────────────────────────
-# 6. Clean up empty or unwanted files
+# 5. Clean up — remove pi/npm if leftover from earlier syncs
 # ──────────────────────────────────────────────────────────────────
-info "6. Cleaning up..."
+info "5. Cleaning up..."
 
-# Remove node_modules if accidentally copied
-if [ -d "pi/npm/node_modules" ] && [ "$DRY_RUN" = false ]; then
-	rm -rf pi/npm/node_modules
-	ok "removed pi/npm/node_modules (not tracked)"
-fi
-
-# Remove .gitignore within copied dirs that might interfere
-if [ -f "pi/npm/.gitignore" ] && [ "$DRY_RUN" = false ]; then
-	# Keep it, it's a legit part of the npm package config
-	ok "kept pi/npm/.gitignore"
+if [ -d "pi/npm" ] && [ "$DRY_RUN" = false ]; then
+	rm -rf pi/npm
+	ok "removed pi/npm (not tracked)"
 fi
 
 # ──────────────────────────────────────────────────────────────────
-# 7. Commit & Push
+# 6. Commit & Push
 # ──────────────────────────────────────────────────────────────────
-info "7. Committing and pushing..."
+info "6. Committing and pushing..."
 
 if [ "$DRY_RUN" = true ]; then
 	dry "git add -A"
