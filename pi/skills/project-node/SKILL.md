@@ -65,7 +65,7 @@ Links to files, commits, issues, or external resources.
 | Field | Required | Description |
 |-------|----------|-------------|
 | `date` | yes | Date of recording, `YYYY-MM-DD` format |
-| `type` | yes | One of: `decision`, `knowledge`, `bug`, `reference` |
+| `type` | yes | One of: `decision`, `knowledge`, `bug`, `reference`, `plan` |
 | `tags` | no | Array of freeform lowercase tags for cross-referencing |
 | `session` | no | Session name or ID for traceability |
 
@@ -79,6 +79,7 @@ Links to files, commits, issues, or external resources.
 | `knowledge` | Learned facts, research findings, domain insights, onboarding context | "Vitest 3.x Migration Guide" |
 | `bug` | Root causes, fixes, workarounds, reproduction steps | "Auth Token Race Condition Root Cause" |
 | `reference` | Commands, configs, tooling setup, external links, cheatsheets | "Staging Deploy Commands" |
+| `plan` | Roadmaps, implementation plans, task breakdowns, strategies, todo items | "Test Plan for pi-web-access" |
 
 ---
 
@@ -101,7 +102,7 @@ Links to files, commits, issues, or external resources.
    YYYY-MM-DD_type-slug-title.md
    ```
    - Date = today's date
-   - Type = one of decision/knowledge/bug/reference
+   - Type = one of decision/knowledge/bug/reference/plan
    - Slug-title = 2-5 word kebab-case summary
    - Example: `2026-05-22_decision-adopt-result-pattern.md`
 
@@ -195,7 +196,7 @@ Found:
 
 - **INDEX.md is missing or stale**: If INDEX.md doesn't exist but `entries/` contains files, rebuild INDEX.md by scanning entries.
 - **No notes found**: Inform the user politely and suggest saving a note.
-- **Ambiguous type**: Default to `knowledge` if the type isn't clear.
+- **Ambiguous type**: Default to `knowledge` if the type isn't clear. If the content is about future actions or a roadmap (not yet learned/decided), consider `plan`.
 - **Omit optional sections**: If no references or rationale, just skip them.
 - **Chinese content**: Fully supported — filenames should still use English/kebab-case, but note body can be in Chinese.
 - **No docs/notes/ directory**: Create `docs/notes/` and `docs/notes/entries/` on first save.
