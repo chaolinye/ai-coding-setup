@@ -1,6 +1,6 @@
 ---
 name: project-node
-description: Records project knowledge and decisions into structured notes (docs/notes/), and retrieves them in future sessions. Trigger with "project note"/"record this"/"save that" (save) or "recall"/"project knowledge"/"what did we learn" (retrieve). Use whenever the user mentions saving project context or asks what we know about a topic.
+description: Records project knowledge and decisions into structured notes (docs/notes/), and retrieves them in future sessions. Trigger with "project note"/"record this"/"save that" (save) or "recall"/"project knowledge"/"what did we learn" (retrieve). Only trigger on explicit user requests. Does not apply to web search results or research information shared by the user without a trigger phrase.
 ---
 
 # Project Node Skill
@@ -199,3 +199,4 @@ Found:
 - **Omit optional sections**: If no references or rationale, just skip them.
 - **Chinese content**: Fully supported — filenames should still use English/kebab-case, but note body can be in Chinese.
 - **No docs/notes/ directory**: Create `docs/notes/` and `docs/notes/entries/` on first save.
+- **Web search / research sharing**: If the user presents web search results, research summaries, or any information without using a save trigger phrase, do not auto-save. The user must explicitly request it.

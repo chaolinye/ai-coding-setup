@@ -5,8 +5,8 @@
   "defaultThinkingLevel": "high",
   "theme": "light",
   "packages": [
-    "npm:pi-web-access",
     "npm:pi-init",
-    "npm:pi-weixinbot"
+    "npm:pi-weixinbot",
+    "npm:pi-web-access"
   ]
 }
