@@ -175,9 +175,15 @@ else
 fi
 
 # ──────────────────────────────────────────────────────────────────
-# 5. Clean up — remove pi/npm if leftover from earlier syncs
+# 5. AGENTS.md
 # ──────────────────────────────────────────────────────────────────
-info "5. Cleaning up..."
+info "5. Copying pi AGENTS.md..."
+copy_file "$PI_AGENT_HOME/AGENTS.md" "pi/AGENTS.md"
+
+# ──────────────────────────────────────────────────────────────────
+# 6. Clean up — remove pi/npm if leftover from earlier syncs
+# ──────────────────────────────────────────────────────────────────
+info "6. Cleaning up..."
 
 if [ -d "pi/npm" ] && [ "$DRY_RUN" = false ]; then
 	rm -rf pi/npm
@@ -185,9 +191,9 @@ if [ -d "pi/npm" ] && [ "$DRY_RUN" = false ]; then
 fi
 
 # ──────────────────────────────────────────────────────────────────
-# 6. Commit & Push
+# 7. Commit & Push
 # ──────────────────────────────────────────────────────────────────
-info "6. Committing and pushing..."
+info "7. Committing and pushing..."
 
 if [ "$DRY_RUN" = true ]; then
 	dry "git add -A"
