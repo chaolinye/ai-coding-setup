@@ -2,7 +2,7 @@
   "lastChangelogVersion": "0.75.5",
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-flash",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "high",
   "theme": "dark",
   "packages": [
     {
@@ -11,7 +11,12 @@
         "+skills/init/SKILL.md"
       ]
     },
-    "npm:pi-weixinbot",
+    {
+      "source": "npm:pi-weixinbot",
+      "extensions": [
+        "-src/weixin.ts"
+      ]
+    },
     "npm:pi-web-access"
   ],
   "extensions": [
