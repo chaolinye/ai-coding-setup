@@ -59,10 +59,12 @@ copy_dir() {
 		mkdir -p "$dst"
 		# Use rsync if available for cleaner output, fallback to cp
 		if command -v rsync &>/dev/null; then
-			rsync -a --delete --exclude="*.un~" "$src/" "$dst/"
+			rsync -a --delete --exclude="*~" "$src/" "$dst/"
 		else
 			rm -rf "$dst"
 			cp -R "$src" "$(dirname "$dst")"
+			# Remove backup/temp files in the destination
+			find "$dst" -name '*~' -delete
 		fi
 		ok "$(basename "$src")/ → $dst/"
 	else
