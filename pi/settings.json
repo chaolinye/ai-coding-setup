@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.76.0",
+  "lastChangelogVersion": "0.79.1",
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-flash",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "xhigh",
   "theme": "dark",
   "packages": [
     {
@@ -17,7 +17,15 @@
         "-src/weixin.ts"
       ]
     },
-    "npm:pi-web-access"
+    {
+      "source": "npm:pi-web-access",
+      "extensions": [
+        "+index.ts"
+      ],
+      "skills": [
+        "+skills/librarian/SKILL.md"
+      ]
+    }
   ],
   "extensions": [
     "+extensions/btw.ts"
