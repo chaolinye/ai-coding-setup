@@ -29,5 +29,14 @@
   ],
   "extensions": [
     "+extensions/btw.ts"
+  ],
+  "skills": [
+    "-skills/engineering/prototype/SKILL.md",
+    "-skills/productivity/write-a-skill/SKILL.md",
+    "-skills/productivity/caveman/SKILL.md",
+    "-skills/productivity/handoff/SKILL.md"
+  ],
+  "prompts": [
+    "-prompts/plan.md"
   ]
 }
