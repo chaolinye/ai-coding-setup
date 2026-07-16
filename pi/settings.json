@@ -1,9 +1,9 @@
 {
-  "lastChangelogVersion": "0.79.1",
+  "lastChangelogVersion": "0.80.6",
   "defaultProvider": "volcengine",
   "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "high",
-  "theme": "dark",
+  "theme": "dark/light",
   "packages": [
     {
       "source": "npm:pi-init",

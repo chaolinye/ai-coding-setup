@@ -1,3 +1,7 @@
+# Language guidelines
+
+务必使用中文回答，技术术语和代码除外
+
 # Behavioral guidelines 
 
 ## 1. Think Before Coding
