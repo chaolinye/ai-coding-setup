@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.80.6",
+  "lastChangelogVersion": "0.81.1",
   "defaultProvider": "volcengine",
   "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "high",

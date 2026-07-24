@@ -1,6 +1,6 @@
 # MISSION.md Format
 
-`docs/MISSION.md` captures the _reason_ the user is learning this topic (created under `docs/` to keep the workspace root clean). Every teaching decision — what to teach next, which resources to surface, which exercises to design — should trace back to this document.
+`docs/MISSION.md` captures the _reason_ the user is learning this topic. Every teaching decision — what to teach next, which resources to surface, which exercises to design — should trace back to this document.
 
 ## Template
 
